@@ -32,7 +32,7 @@
         <script type="text/javascript" src="js/ebola_maps.js"></script>
 </head>
 
-<body onload="load()">
+<body onLoad="load()">
 
 <%
  String code = request.getParameter("code");
@@ -131,7 +131,7 @@
                         <ul class="nav">
                             <li ><a href="index.html">Outbreak map</a></li>
                             <%
-    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=315817055276955&redirect_uri=" + URLEncoder.encode("http://localhost:8080") + "&scope=publish_stream,offline_access"+"&ext_perm=offline_access";
+    String fbURL = "http://www.facebook.com/dialog/oauth?client_id=315817055276955&redirect_uri=" + URLEncoder.encode("http://thermal-well-768.appspot.com/") + "&scope=publish_stream,offline_access"+"&ext_perm=offline_access";
 %>
                             <li class="active"><a href="<%=fbURL %>">Be a Hero</a></li>
                            
