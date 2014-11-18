@@ -72,8 +72,8 @@ public class GuestbookServletTest {
     guestbookServlet.doGet(request, response);
 
     User currentUser = UserServiceFactory.getUserService().getCurrentUser();
-    String mstfString = MstfTranslate.translate("I am going to school", Language.FRENCH);
-    assertEquals("Hello, "+mstfString  + currentUser.getNickname()+ System.getProperty("line.separator"), stringWriter.toString());
+    //String mstfString = MstfTranslate.translate("I am going to school", Language.FRENCH);
+    assertEquals("Hello, "  + currentUser.getNickname()+ System.getProperty("line.separator"), stringWriter.toString());
   }
 
 }

@@ -44,25 +44,37 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SignGuestbookServlet extends HttpServlet {
+	
+	
   @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp)
+  public void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
+	  String code = req.getParameter("code");
+      if (code == null || code.equals("")) {
+          // an error occurred, handle this
+      }
+	  else{
+		 
 
-    String guestbookName = req.getParameter("guestbookName");
-    Key guestbookKey = KeyFactory.createKey("Guestbook", guestbookName);
-    String content = req.getParameter("content");
-    Date date = new Date();
-    Entity greeting = new Entity("Greeting", guestbookKey);
-    greeting.setProperty("user", user);
-    greeting.setProperty("date", date);
-    greeting.setProperty("content", content);
+	    
+	      Key codeKey = KeyFactory.createKey("Guestbook", code);
+	      String content = req.getParameter("content");
+	      Date date = new Date();
+	      Entity token = new Entity("Token", codeKey);
+	      token.setProperty("code", code);
+	     
+	      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+	      datastore.put(token);
+		   FacebookHelper.postMessage(code,"test");
+		   resp.sendRedirect("/Thanks.html");
+		   //store in the datastore
+		   //display popup
+	  } 
+    
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(greeting);
-
-    resp.sendRedirect("/guestbook.jsp?guestbookName=" + guestbookName);
+    resp.sendRedirect("guestbook/.jsp");
   }
+  
+ 
  
 }

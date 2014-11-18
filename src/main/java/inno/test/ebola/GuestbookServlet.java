@@ -40,8 +40,8 @@ public class GuestbookServlet extends HttpServlet {
     if (currentUser != null) {
       resp.setContentType("text/plain");
      // MstfTranslate mstf = new MstfTranslate();
-      String mstfString = MstfTranslate.translate("I am going to school", Language.FRENCH);
-      resp.getWriter().println("Hello, "+mstfString + currentUser.getNickname());
+     // String mstfString = MstfTranslate.translate("I am going to school", Language.FRENCH);
+      resp.getWriter().println("Hello, "+ currentUser.getNickname());
     } else {
       resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
     }

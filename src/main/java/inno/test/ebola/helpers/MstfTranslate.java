@@ -1,4 +1,6 @@
 package inno.test.ebola.helpers;
+import java.util.Random;
+
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 
@@ -12,11 +14,14 @@ public class MstfTranslate {
    
    // the starting language is always english as for now
    @SuppressWarnings("finally")
-public static String translate(String message, Language arrive){
+public static String translate(String message){
 	   String translatedText="";
 	   try {
 		   setSecret();
-	   translatedText = Translate.execute(message, Language.ENGLISH, arrive);
+	   Language[] langSet= Language.values();
+	   Random randomGenerator = new Random();
+	   int randomInt = randomGenerator.nextInt(langSet.length);
+	   translatedText = Translate.execute(message, Language.ENGLISH, langSet[randomInt]);
 		return translatedText;
 		
 	} catch (Exception e) {

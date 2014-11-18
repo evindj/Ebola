@@ -15,12 +15,12 @@ public class FacebookHelper  {
 	static String accessToken="";
 	static DefaultFacebookClient client;
 	
-	public static String postMessage(String code){
+	public static String postMessage(String code, String message){
 	   
 		// AccessToken accessToken = client.obtainAppAccessToken("315817055276955", "b6c6a7b6d72e514be6d449741d9b4cc5");
 		//FacebookHelper.accessToken = accessToken.getAccessToken();
 		try{
-	    String g = "https://graph.facebook.com/oauth/access_token?client_id=315817055276955&redirect_uri=" + URLEncoder.encode("http://localhost:8080", "UTF-8") + "&client_secret=b6c6a7b6d72e514be6d449741d9b4cc5" + code;
+	    String g = "https://graph.facebook.com/oauth/access_token?client_id=315817055276955&redirect_uri=" + URLEncoder.encode("http://thermal-well-768.appspot.com/sign", "UTF-8") + "&client_secret=b6c6a7b6d72e514be6d449741d9b4cc5" + code;
         URL u = new URL(g);
         URLConnection c = u.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -33,7 +33,7 @@ public class FacebookHelper  {
         client = new DefaultFacebookClient(token);
 		FacebookType publishMessageResponse =
 				  client.publish("me/feed", FacebookType.class,
-				    Parameter.with("message", "RestFB test"));
+				    Parameter.with("message", message));
 		return publishMessageResponse.getId();
 		}
 		catch(Exception e){
